@@ -2,11 +2,19 @@ FROM centos:7
 
 RUN yum install epel-release -y
 
-RUN yum install java-1.8.0-openjdk -y \
-&& yum install wget -y \
-&& wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo \
-&& rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key \
-&& yum install jenkins -y
+RUN yum install wget curl -y
+
+#RUN yum install java-1.8.0-openjdk -y \
+#&& yum install wget -y \
+#&& wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins-ci.org/redhat-stable/jenkins.repo \
+#&& rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key \
+#&& yum install jenkins -y
+
+RUN wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins.io/redhat-stable/jenkins.repo
+
+RUN rpm --import http://pkg.jenkins.io/redhat-stable/jenkins.io.key
+
+RUN yum install java-1.8.0-openjdk -y
 
 RUN wget https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/2.10.0/jenkins-plugin-manager-2.10.0.jar
 
