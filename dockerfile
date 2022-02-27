@@ -9,9 +9,3 @@ RUN sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sourc
 RUN apt update -y
 RUN apt install jenkins -y
 RUN service jenkins start
-RUN ufw allow 8080
-RUN ufw status
-
-#RUN apt-get install nginx -y
-#EXPOSE 80
-#CMD ["nginx", "-g", "daemon off;"]
