@@ -10,9 +10,9 @@ RUN yum install wget curl -y
 #&& rpm --import https://jenkins-ci.org/redhat/jenkins-ci.org.key \
 #&& yum install jenkins -y
 
-RUN wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins.io/redhat-stable/jenkins.repo
+RUN wget -O /etc/yum.repos.d/jenkins.repo https://pkg.jenkins.io/redhat-stable/jenkins.repo
 
-RUN rpm --import http://pkg.jenkins.io/redhat-stable/jenkins.io.key
+RUN rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
 
 RUN yum install java-1.8.0-openjdk -y
 
