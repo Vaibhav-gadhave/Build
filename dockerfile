@@ -1,11 +1,22 @@
+FROM centos:7
 
-FROM ubuntu:latest
-MAINTAINER Vaibhav Gadhave <vvgadhave@gmail.com>
+RUN yum install epel-release -y
 
-RUN apt-get update -y
-RUN apt install openjdk-8-jdk curl wget gnupg -y
-RUN wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | apt-key add -
-RUN sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
-RUN apt update -y
-RUN apt install jenkins -y
-RUN service jenkins start
+RUN yum install java-1.8.0-openjdk -y \
+&& yum install wget -y \
+&& wget -O /etc/yum.repos.d/jenkins.repo http://pkg.jenkins.io/redhat-stable/jenkins.repo \
+&& rpm - import http://pkg.jenkins.io/redhat-stable/jenkins.io.key \
+&& yum install jenkins -y
+
+RUN wget https://github.com/jenkinsci/plugin-installation-manager-tool/releases/download/2.10.0/jenkins-plugin-manager-2.10.0.jar
+
+COPY plugins.txt /root/.jenkins/plugins/
+
+RUN java -jar jenkins-plugin-manager-*.jar - war /usr/lib/jenkins/jenkins.war - plugin-download-directory /root/.jenkins/plugins - plugin-file /root/.jenkins/plugins/plugins.txt \
+&& yum clean all
+
+COPY jenkins-casc.yaml /usr/local/jenkins-casc.yaml
+
+ENV CASC_JENKINS_CONFIG /usr/local/jenkins-casc.yaml
+
+CMD java -Djenkins.install.runSetupWizard=false -jar /usr/lib/jenkins/jenkins.war

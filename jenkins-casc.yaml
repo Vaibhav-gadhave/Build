@@ -1,0 +1,17 @@
+jenkins:
+
+securityRealm:
+
+local:
+
+allowsSignup: false
+
+users:
+
+# create a user called admin
+
+- id: “abcd”
+
+password: “abcd123”
+
+authorizationStrategy: loggedInUsersCanDoAnything
