@@ -4,4 +4,6 @@ RUN yum install epel-release -y
 
 RUN yum install wget curl atop htop openssh-server openssh-clients -y
 
-RUN systemctl start sshd && systemctl status sshd
+CMD ["ping" "8.8.8.8"]
+
+#RUN systemctl start sshd && systemctl status sshd
