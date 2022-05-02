@@ -12,7 +12,9 @@ RUN mkdir -p /home/vaibhavg/.ssh && chown -R vaibhavg  /home/vaibhavg/.ssh/
 RUN touch /home/vaibhavg/.ssh/known_hosts
 
 
-COPY /home/vaibhavg/.ssh/* /home/vaibhavg/.ssh/
+COPY /home/vaibhavg/.ssh/id_rsa /home/vaibhavg/.ssh/
+COPY /home/vaibhavg/.ssh/id_rsa.pub /home/vaibhavg/.ssh/
+COPY /home/vaibhavg/.ssh/known_hosts /home/vaibhavg/.ssh/
 #COPY files/config          /home/vaibhavg/.ssh/
 COPY /etc/pam.d/sshd      /etc/pam.d/sshd
 RUN touch /home/vaibhavg/.ssh/environment
