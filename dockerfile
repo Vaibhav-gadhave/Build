@@ -12,16 +12,14 @@ RUN mkdir -p /home/vaibhavg/.ssh && chown -R vaibhavg  /home/vaibhavg/.ssh/
 RUN touch /home/vaibhavg/.ssh/known_hosts
 
 
-COPY /home/vaibhavg/.ssh/id_rsa /home/vaibhavg/.ssh/
-COPY /home/vaibhavg/.ssh/id_rsa.pub /home/vaibhavg/.ssh/
-COPY /home/vaibhavg/.ssh/known_hosts /home/vaibhavg/.ssh/
-#COPY files/config          /home/vaibhavg/.ssh/
-COPY /etc/pam.d/sshd      /etc/pam.d/sshd
-RUN touch /home/vaibhavg/.ssh/environment
+#COPY /home/vaibhavg/.ssh/id_rsa /home/vaibhavg/.ssh/
+#COPY /home/vaibhavg/.ssh/id_rsa.pub /home/vaibhavg/.ssh/
+#COPY /home/vaibhavg/.ssh/known_hosts /home/vaibhavg/.ssh/
+#COPY files/config /home/vaibhavg/.ssh/
+COPY /etc/pam.d/sshd /etc/pam.d/sshd
 RUN chown -R vaibhavg /home/vaibhavg/.ssh
 RUN chmod 400 -R  /home/vaibhavg/.ssh/*
 RUN chmod 700 -R  /home/vaibhavg/.ssh/known_hosts
-RUN chmod 700  /home/vaibhavg/.ssh/environment
 
 
 # Enable sshd
