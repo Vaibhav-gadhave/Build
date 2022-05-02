@@ -1,7 +1,7 @@
 FROM centos:7
 
 RUN yum install epel-release -y
-RUN yum install wget curl atop htop openssh-server openssh-clients sudo telnet vim git ncurses-term net-tools -y
+RUN yum install wget curl htop openssh-server openssh-clients sudo telnet vim git net-tools -y
 
 RUN mkdir -p /var/run/sshd
 RUN ssh-keygen -t rsa -f /etc/ssh/ssh_host_rsa_key
