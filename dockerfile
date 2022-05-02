@@ -6,27 +6,12 @@ RUN yum install wget curl atop htop openssh-server openssh-clients sudo telnet v
 
 RUN useradd vaibhavg
 
-RUN mkdir -p /home/vaibhavg/.ssh && chown -R vaibhavg  /home/vaibhavg/.ssh/ 
+RUN echo "PasswordAuthentication yes" >> /etc/ssh/sshd_config
 
-# Create known_hosts
-RUN touch /home/vaibhavg/.ssh/known_hosts
+RUN ssh-keygen -A
 
+RUN echo "vaibhavg:password" | chpasswd
 
-#COPY /home/vaibhavg/.ssh/id_rsa /home/vaibhavg/.ssh/
-#COPY /home/vaibhavg/.ssh/id_rsa.pub /home/vaibhavg/.ssh/
-#COPY /home/vaibhavg/.ssh/known_hosts /home/vaibhavg/.ssh/
-#COPY files/config /home/vaibhavg/.ssh/
-COPY /etc/pam.d/sshd /etc/pam.d/sshd
-RUN chown -R vaibhavg /home/vaibhavg/.ssh
-RUN chmod 400 -R  /home/vaibhavg/.ssh/*
-RUN chmod 700 -R  /home/vaibhavg/.ssh/known_hosts
+RUN echo "root:centos" | chpasswd
 
-
-# Enable sshd
-COPY /etc/ssh/sshd_config /etc/ssh/
-RUN ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa 
-
-# Add a account into sudoers and this account doesn't need to type his password
-#COPY files/sudoers /etc/
-#COPY files/start.sh /root/
-
+CMD ["/usr/sbin/sshd", "-D"]
