@@ -1,11 +1,11 @@
 pipeline {
-    agent { docker { image 'maven:3.3.3' } }
-      stages {
-        stage('log version info') {
-      steps {
-        sh 'mvn --version'
-        sh 'mvn clean install'
-      }
+    agent { dockerfile true }
+    stages {
+        stage('Test') {
+            steps {
+                sh 'whoami'
+                sh 'free -h'
+            }
+        }
     }
-  }
 }
