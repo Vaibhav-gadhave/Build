@@ -1,8 +1,5 @@
 pipeline {
     agent { dockerfile true }
-    parameters {
-    imageTag(name: 'DOCKER_IMAGE', image: 'jenkins/jenkins')
-  }
     stages {
         stage('Development') {
 	steps {
