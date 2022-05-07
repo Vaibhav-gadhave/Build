@@ -1,7 +1,7 @@
 pipeline {
     agent { dockerfile true }
     parameters {
-    imageTag(defaultTag: 'lts-jdk11',tagOrder: 'NATURAL')
+    imageTag(name: 'DOCKER_IMAGE', image: 'jenkins/jenkins')
   }
     stages {
         stage('Development') {
