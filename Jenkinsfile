@@ -4,7 +4,7 @@ pipeline {
         stage('Development') {
             steps {
                 echo 'Your Image has been created'
-                app = docker.build("getintodevops/hellonode")                
+		app.tag(["tag1","latest"])		
 		echo 'Thanks for using Jenkins'
             }
         }
