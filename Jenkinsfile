@@ -1,10 +1,11 @@
 pipeline {
     agent { dockerfile true }
     stages {
-        stage('Test') {
+        stage('Development') {
             steps {
                 echo 'Your Image has been created'
-                echo 'Thanks for using Jenkins'
+                app = docker.build("getintodevops/hellonode")                
+		echo 'Thanks for using Jenkins'
             }
         }
     }
