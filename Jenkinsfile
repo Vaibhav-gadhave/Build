@@ -3,8 +3,8 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'whoami'
-                sh 'free -h'
+                echo 'Your Image has been created'
+                echo 'Thanks for using Jenkins'
             }
         }
     }
